@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:connectivity/connectivity.dart';
 
 
 
@@ -46,7 +45,7 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
       }
     } on FormatException {
       Fluttertoast.showToast(
-        msg:"İşleminiz İptal Edildi!",
+        msg:"Has been canceled!",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIos: 1,
@@ -91,21 +90,20 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
             ),
             actions: <Widget>[
               FlatButton(
-                child: Text("Kapat"),
+                child: Text("Close"),
                 onPressed:() {
                   Navigator.of(context).pop();
                 },
               ),
               FlatButton(
-                child: Text('Yeniden Tara'),
+                child: Text('Re-Scan'),
                 onPressed: _scanqr,
               ),
 
               FlatButton(
-                child: Text('Git'),
+                child: Text('Go'),
                 onPressed: _launchUrl,
               ),
-
             ],
           );
         }
@@ -117,7 +115,7 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
         context: context,
       builder: (BuildContext context){
           return AlertDialog(
-            title: Text("Hakkında",
+            title: Text("About",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 25.0,
@@ -129,50 +127,18 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
               FlatButton.icon(
                   onPressed: () => Navigator.of(context).pop(),
                   icon: Icon(Icons.close),
-                  label: Text("Kapat"),
+                  label: Text("Close"),
               ),
               FlatButton.icon(
                   onPressed: () => _support(),
                   icon: Icon(Icons.check),
-                  label: Text("Destek")
+                  label: Text("Support")
               )
             ],
           );
       }
     );
   }
-
-/*  void resultSave (List<String> list, String result) async{
-    final resultRecorder = await SharedPreferences.getInstance();
-    if(result != null){
-      resultRecorder.setBool("status", true);
-      resultRecorder.setString("resultString", result);
-      resultRecorder.setStringList("resultList", list);
-      //resultRecorder.setInt("index", );
-    }
-    list.add(result);
-    resultDisp();
-  }
-  void resultDisp() async{
-      final resultRecorder = await SharedPreferences.getInstance();
-      bool savedStatus = resultRecorder.getBool("status");
-      String savedResult = resultRecorder.getString("resultString");
-      List<String> savedList = resultRecorder.getStringList("resultList");
-      //int index = resultRecorder.getInt("index");
-      setState(() {
-        result = savedResult;
-        status = savedStatus;
-        list = savedList;
-      });
-  }
-
-  void resultDelete (List list, int index) async{
-    final resultRecorder = await SharedPreferences.getInstance();
-    print("index:  " + index.toString());
-
-    resultRecorder.remove("resultList");
-  }
-*/
   Widget build (BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -209,14 +175,14 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
                   ),
                   FloatingActionButton.extended(
                       icon: Icon(Icons.person_pin),
-                      label: Text("Hakkında"),
+                      label: Text("About"),
                       onPressed: _showDialog,
                       backgroundColor: Colors.amber,
                   ),
                   FloatingActionButton.extended(
                     onPressed: () => exit(0),
                     icon: Icon(Icons.close),
-                    label: Text("Çıkış"),
+                    label: Text("Exit"),
                     backgroundColor: Colors.amber,
                   ),
                 ]
