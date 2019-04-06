@@ -91,15 +91,21 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
             ),
             actions: <Widget>[
               FlatButton(
-                child: Text('Yeniden Tara'),
-                onPressed: () {
+                child: Text("Kapat"),
+                onPressed:() {
                   Navigator.of(context).pop();
                 },
               ),
               FlatButton(
+                child: Text('Yeniden Tara'),
+                onPressed: _scanqr,
+              ),
+
+              FlatButton(
                 child: Text('Git'),
                 onPressed: _launchUrl,
               ),
+
             ],
           );
         }
